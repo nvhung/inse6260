@@ -60,3 +60,12 @@ Development Environment:
 	- Eclipse
 	- Flash Builder
 	- version control system: GIT or SVN
+	
+	Technology Stack:
+		- Server side:
+			- Java SE 6 
+			- Spring 3
+			- Hibernate 4
+		- Client side:
+			- Flex 4
+			- PureMVC

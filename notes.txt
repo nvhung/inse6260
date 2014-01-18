@@ -1,0 +1,62 @@
+Requirements:
+
+	Functional Requirements:
+
+		- account creation:
+			- online: allow customer to fill in open account form online, then bring their ids and sign the form at a cashier to open it
+			- allow bank staff to enter account information to the system
+
+		- login
+			- perform random security checkings
+	
+		- deposit
+			- allow customer to send a cheque image and bring the real one to the bank to deposit it (what is the benefit?)
+			- ...
+	
+		- transfer
+			- transfer between accounts internally and externally
+	
+		- bill payment
+			- allow customer to schedule automatic payments
+	
+		- credit cards as an account
+
+		- investments: need to do research on the concepts
+
+		- management
+			- allow customer to update their profile: phone, address, email address, password
+	
+		- appointments
+			- allow customer to make appointment with bank's representatives online
+	
+		- account statement
+			- allow customer to view transactions
+			- allow customer to get online statements
+			- send notification email to customer when the latest statement is ready
+		
+		- notification
+			- allow customer to receive notification by email when
+				- a transaction on an account is performed
+					- when the amount is greater than a specific limit
+			
+		- auditing
+			- record customer online operations
+	
+	Non Functional Requirements:
+	
+		- system should be reliable
+			- data backup
+		- scalability
+		- security
+			- https
+			- password policy
+			- security checking
+		- multiple access
+			- business transactions
+			
+Development Environment:
+	- PostgreSQL
+	- Tomcat 6 server
+	- Eclipse
+	- Flash Builder
+	- version control system: GIT or SVN

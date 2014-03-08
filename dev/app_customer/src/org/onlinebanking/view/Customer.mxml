@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 
+		 width="100%" height="100%" xmlns:view="org.onlinebanking.view.*">
+	
+	<s:layout>
+		<s:VerticalLayout gap="0"
+						  paddingTop="0" paddingBottom="4" paddingLeft="4" paddingRight="4"/>
+	</s:layout>
+	
+	<view:Header id="header" width="100%" showButtons="true"/>
+	
+	<s:Spacer height="24"/>
+	
+	<s:TabBar id="tabBar" dataProvider="{viewstack}" />
+	
+	<s:Spacer height="8"/>
+	
+	<mx:ViewStack id="viewstack" 
+				  width="100%" height="100%"
+				  creationPolicy="all">
+		
+		<s:NavigatorContent width="100%" height="100%" label="My Accounts">
+			<view:MyAccounts 
+				id="tabMyAccounts"
+				top="0" bottom="0" left="0" right="0"/>
+		</s:NavigatorContent>
+		
+		<s:NavigatorContent width="100%" height="100%" label="Payments &amp;Transfers">
+			<view:Payments 
+				id="tabPayments"
+				top="0" bottom="0" left="0" right="0"/>
+		</s:NavigatorContent>
+		
+		<s:NavigatorContent width="100%" height="100%" label="My Profile">
+			<view:Profile
+				id="tabProfile"
+				top="0" bottom="0" left="0" right="0"/>
+		</s:NavigatorContent>
+	</mx:ViewStack>
+	
+</s:Group>

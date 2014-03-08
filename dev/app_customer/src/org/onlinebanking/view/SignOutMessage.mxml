@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 
+		 xmlns:view="org.onlinebanking.view.*">
+	
+	<s:layout>
+		<s:VerticalLayout paddingTop="0" paddingBottom="8" paddingLeft="8" paddingRight="8" gap="0"/>
+	</s:layout>
+	
+	<view:Header width="100%"/>
+	
+	<s:Spacer height="24"/>
+	
+	<s:Label text="You have successfully signed out." 
+			 fontWeight="bold" 
+			 fontSize="16" 
+			 color="0x0079BF"
+			 paddingBottom="16"/>
+	
+	<s:Label text="Thank you for using Online Banking System."
+			 paddingBottom="16"/>
+	
+	<s:Button id="btnSignInAgain" label="Sign in again"/>
+</s:Group>

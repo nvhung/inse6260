@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<actionScriptProperties analytics="false" mainApplicationPath="main.mxml" projectUUID="08e8a9db-edb8-4946-826f-dd0f6c58fb3c" version="10">
-  <compiler additionalCompilerArguments="-locale en_US" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderLocation="P:/Hung/Concordia/INSE 6260-Winter-2013/Project/dev/app_server/web" outputFolderPath="bin-debug" removeUnusedRSL="true" rootURL="http://localhost:8080/onlinebanking/webapp" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
+<actionScriptProperties analytics="false" mainApplicationPath="app.mxml" projectUUID="27e3e857-ce50-4e15-8172-8d64e996f8bd" version="10">
+  <compiler additionalCompilerArguments="-locale en_US" autoRSLOrdering="false" copyDependentFiles="false" fteInMXComponents="false" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderLocation="P:/Hung/Concordia/INSE 6260-Winter-2013/Project/dev/web/webapp" outputFolderPath="bin-debug" removeUnusedRSL="false" rootURL="http://www.onlinebanking.com/webapp" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
     <compilerSourcePath/>
     <libraryPath defaultLinkType="0">
       <libraryPathEntry kind="4" path="">
@@ -14,7 +14,7 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
-    <application path="main.mxml"/>
+    <application path="app.mxml"/>
   </applications>
   <modules/>
   <buildCSSFiles/>

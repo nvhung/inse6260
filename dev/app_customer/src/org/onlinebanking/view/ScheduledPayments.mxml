@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="right"/>
+	</s:layout>
+	
+	<s:Label width="100%" text="Scheduled Payments" fontWeight="bold"/>
+	
+	<mx:DataGrid id="dgSchedule" width="100%" selectable="false">
+		<mx:columns>
+			<mx:DataGridColumn width="120" headerText="Select"
+							   resizable="false"
+							   sortable="false"/>
+			<mx:DataGridColumn width="120" dataField="account" headerText="From"
+							   resizable="false"
+							   sortable="true"/>
+			<mx:DataGridColumn width="280" dataField="payee" headerText="To"
+							   resizable="false"
+							   sortable="true"/>
+			<mx:DataGridColumn width="280" dataField="amount" headerText="Amount"
+							   resizable="false"
+							   sortable="true"/>
+			<mx:DataGridColumn width="70" dataField="date" headerText="Date"
+							   resizable="false"
+							   sortable="true"/>
+			<mx:DataGridColumn width="70" dataField="paymentId" headerText="Ref #"
+							   resizable="false"
+							   sortable="true"/>
+		</mx:columns>
+	</mx:DataGrid>
+	
+	<s:Button label="Cancel Selected Scheduled Payments"/>
+</s:Group>

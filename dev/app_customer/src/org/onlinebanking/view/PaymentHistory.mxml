@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayList;
+			
+			
+			[Bindable]
+			private var historyDurations: ArrayList = new ArrayList([
+				"1 Month",
+				"2 Month",
+				"3 Month",
+				"4 Month",
+				"5 Month",
+				"6 Month"
+			]);
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="right"/>
+	</s:layout>
+	
+	<s:Label width="100%" text="Payment History" fontWeight="bold"/>
+	
+	<s:Group width="100%">
+		<s:HGroup verticalAlign="middle">
+			<s:Label text="Select:"/>
+			<s:DropDownList width="100" dataProvider="{historyDurations}"/>
+			<s:Button label="View"/>
+		</s:HGroup>
+		
+		<s:HGroup right="0" verticalAlign="middle">
+			<s:Label text="Search payees:"/>
+			<s:TextInput width="100"/>
+			<s:Button label="Filter"/>
+		</s:HGroup>
+	</s:Group>
+	
+	<mx:DataGrid id="dgHistory" width="100%" selectable="false">
+		<mx:columns>
+			<mx:DataGridColumn width="120" dataField="payee" headerText="To"
+							   resizable="false"
+							   sortable="true"/>
+			<mx:DataGridColumn width="280" dataField="amount" headerText="Amount"
+							   resizable="false"
+							   sortable="true"/>
+			<mx:DataGridColumn width="70" dataField="date" headerText="Date"
+							   resizable="false"
+							   sortable="true"/>
+			<mx:DataGridColumn width="70" dataField="paymentId" headerText="Ref #"
+							   resizable="false"
+							   sortable="true"/>
+		</mx:columns>
+	</mx:DataGrid>
+</s:Group>

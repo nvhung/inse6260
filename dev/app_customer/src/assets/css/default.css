@@ -1,0 +1,8 @@
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+.tabHeader {
+	color: #0079BF;
+	fontWeight: bold;
+	fontSize: 20;
+}

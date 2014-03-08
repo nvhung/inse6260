@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayList;
+			
+			
+			private static const LABEL_PAYMENT: String = "Make a Payment";
+			private static const LABEL_TRANSFER: String = "Transfer";
+			private static const BUTTON_VERIFY_TRANSFER: String = "Verify Transaction";
+			private static const BUTTON_VERIFY_PAYMENT: String = "Verify Payment";
+			private static const LABEL_VERIFY_TRANSFER: String = "Verify Your Transaction";
+			private static const LABEL_VERIFY_PAYMENT: String = "Verify Your Payment";
+			
+			[Bindable]
+			private var isVerifyVisible: Boolean;
+			
+			[Bindable]
+			public var isTransfer: Boolean;
+			
+			
+			private function handleVerifyClick(event: MouseEvent): void {
+				isVerifyVisible = true;
+			}
+			
+			private function handleSubmitClick(event: MouseEvent): void {
+				isVerifyVisible = false;
+			}
+			
+			private function handleCancelClick(event: MouseEvent): void {
+				isVerifyVisible = false;
+			}
+		]]>
+	</fx:Script>
+	
+	<s:VGroup id="grpForm" width="650" horizontalAlign="right"
+			  visible="{!isVerifyVisible}" includeInLayout="{!isVerifyVisible}">
+		<s:Label width="100%" text="{isTransfer ? LABEL_TRANSFER : LABEL_PAYMENT}" fontWeight="bold"/>
+		
+		<s:Group width="100%">
+			
+			<s:Rect top="0" bottom="0" left="0" right="0">
+				<s:stroke>
+					<s:SolidColorStroke color="0xE4E4E4"/>
+				</s:stroke>
+				<s:fill>
+					<s:SolidColor color="0xE8F3F9"/>
+				</s:fill>
+			</s:Rect>
+			
+			<s:VGroup top="16" bottom="16" left="8" right="8">
+				<s:HGroup verticalAlign="middle" gap="32">
+					<s:Label width="100" text="From:" textAlign="right"/>
+					<s:DropDownList width="150"/>
+				</s:HGroup>
+				
+				<s:HGroup verticalAlign="middle" gap="32">
+					<s:Label width="100" text="To:" textAlign="right"/>
+					<s:DropDownList width="150"/>
+					<s:Button label="Add Payee" visible="{!isTransfer}"/>
+				</s:HGroup>
+				
+				<s:HGroup verticalAlign="middle" gap="32">
+					<s:Label width="100" text="Amount:" textAlign="right"/>
+					<s:TextInput width="150"/>
+				</s:HGroup>
+				
+				<s:HGroup verticalAlign="middle" gap="32">
+					<s:Label width="100" text="Date:" textAlign="right"/>
+					<mx:DateField width="150"/>
+				</s:HGroup>
+			</s:VGroup>
+		</s:Group>
+		
+		<s:Button right="0" label="{isTransfer ? BUTTON_VERIFY_TRANSFER : BUTTON_VERIFY_PAYMENT}"
+				  click="handleVerifyClick(event)"/>
+	</s:VGroup>
+	
+	<s:VGroup id="grpVerify" width="650" horizontalAlign="right" 
+			  visible="{isVerifyVisible}" includeInLayout="{isVerifyVisible}">
+		<s:Label width="100%" text="{isTransfer ? LABEL_VERIFY_TRANSFER : LABEL_VERIFY_PAYMENT}" fontWeight="bold"/>
+		
+		<s:Group width="100%">
+			
+			<s:Rect top="0" bottom="0" left="0" right="0">
+				<s:stroke>
+					<s:SolidColorStroke color="0xE4E4E4"/>
+				</s:stroke>
+				<s:fill>
+					<s:SolidColor color="0xE8F3F9"/>
+				</s:fill>
+			</s:Rect>
+			
+			<s:VGroup top="16" bottom="16" left="8" right="8" gap="16">
+				<s:HGroup verticalAlign="middle" gap="32">
+					<s:Label width="100" text="From:" textAlign="right"/>
+					<s:Label width="150" text="Checking 0001"/>
+				</s:HGroup>
+				
+				<s:HGroup verticalAlign="middle" gap="32">
+					<s:Label width="100" text="To:" textAlign="right"/>
+					<s:Label width="150" text="Cosco 1234567890"/>
+				</s:HGroup>
+				
+				<s:HGroup verticalAlign="middle" gap="32">
+					<s:Label width="100" text="Amount:" textAlign="right"/>
+					<s:Label width="150" text="$120.50 CAD"/>
+				</s:HGroup>
+				
+				<s:HGroup verticalAlign="middle" gap="32">
+					<s:Label width="100" text="Date:" textAlign="right"/>
+					<s:Label width="150" text="Mar 20, 2014"/>
+				</s:HGroup>
+			</s:VGroup>
+		</s:Group>
+		
+		<s:HGroup right="0">
+			<s:Button label="Cancel"
+					  click="handleCancelClick(event)"/>
+			<s:Button label="Submit Transaction"
+					  click="handleSubmitClick(event)"/>
+		</s:HGroup>
+	</s:VGroup>
+</s:Group>

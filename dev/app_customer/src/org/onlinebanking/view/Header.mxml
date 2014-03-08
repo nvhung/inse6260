@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	
+	<fx:Script>
+		<![CDATA[
+			[Bindable]
+			public var showButtons: Boolean;
+		]]>
+	</fx:Script>
+	
+	<s:Rect top="0" bottom="0" left="0" right="0" 
+			bottomLeftRadiusX="6" bottomLeftRadiusY="6" bottomRightRadiusX="6" bottomRightRadiusY="6">
+		<s:fill>
+			<s:SolidColor color="0x0079C1"/>
+		</s:fill>
+	</s:Rect>
+	
+	<s:Label top="32" left="32" bottom="24"
+			 fontSize="32" fontWeight="bold" fontFamily="Times"
+			 color="0xF9FAF4"
+			 text="Online Banking System"/>
+	
+	<s:HGroup top="8" right="10"
+			  fontSize="11"
+			  color="0xB3D7ED"
+			  verticalAlign="middle"
+			  visible="{showButtons}"
+			  includeInLayout="{showButtons}">
+		<s:Label text="Mr. A Nguyen"/>
+		<s:Label text="|"/>
+		<s:Button id="btnSignOut"
+				  height="18"
+				  label="Sign Out" 
+				  skinClass="org.onlinebanking.skin.SignOutButtonSkin"/>
+	</s:HGroup>
+</s:Group>

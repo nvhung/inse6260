@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayList;
+			
+			
+			private static const LABEL_ADD_PAYEE: String = "Add a New Payee";
+			private static const LABEL_VERIFY_PAYEE: String = "Verify Your Payee Details";
+			
+			[Bindable]
+			private var provinces: ArrayList = new ArrayList([
+				"AB", "BC", "MB", "NB", "NL", "NT", "NS", "NU", "ON", "PE", "QC", "SK", "YT"
+			]);
+			
+			[Bindable]
+			private var showVerify: Boolean;
+			
+			
+			private function handleVerifyClick(event: MouseEvent): void {
+				showVerify = true;
+			}
+			
+			private function handleBackClick(event: MouseEvent): void {
+				showVerify = false;
+			}
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout gap="8"/>
+	</s:layout>
+	
+	<s:Label fontWeight="bold" text="{showVerify ? LABEL_VERIFY_PAYEE : LABEL_ADD_PAYEE}"/>
+	
+	<s:Group width="100%"
+			 visible="{!showVerify}" 
+			 includeInLayout="{!showVerify}">
+		
+		<s:Rect top="0" bottom="0" left="0" right="0">
+			<s:stroke>
+				<s:SolidColorStroke color="0xE4E4E4"/>
+			</s:stroke>
+			
+			<s:fill>
+				<s:SolidColor color="0xF6F6F6"/>
+			</s:fill>
+		</s:Rect>
+		
+		<s:HGroup top="16" left="18" gap="16">
+			<s:Label text="Payee Province"
+					 width="140"/>
+			<s:Label text="Payee Name"
+					 width="140"/>
+			<s:Label text="Account Number"
+					 width="140"/>
+			<s:Label text="Nickname"
+					 width="140"/>
+		</s:HGroup>
+		
+		<s:HGroup top="30" bottom="16" left="18" gap="16">
+			<s:DropDownList dataProvider="{provinces}" width="140"/>
+			<s:TextInput width="140"/>
+			<s:TextInput width="140"/>
+			<s:TextInput width="140"/>
+		</s:HGroup>
+	</s:Group>
+	
+	<s:Group width="100%"
+			 visible="{showVerify}" 
+			 includeInLayout="{showVerify}">
+		
+		<s:Rect top="0" bottom="0" left="0" right="0">
+			<s:stroke>
+				<s:SolidColorStroke color="0xE4E4E4"/>
+			</s:stroke>
+			
+			<s:fill>
+				<s:SolidColor color="0xF6F6F6"/>
+			</s:fill>
+		</s:Rect>
+		
+		<s:VGroup top="16" bottom="16" left="18" gap="12">
+			<s:HGroup gap="24">
+				<s:Label text="Payee Province:"
+						 width="140"/>
+				<s:Label text="Quebec"
+						 width="140"/>
+			</s:HGroup>
+			
+			<s:HGroup gap="24">
+				<s:Label text="Payee Name:"
+						 width="140"/>
+				<s:Label text="Hydro Quebec"
+						 width="140"/>
+			</s:HGroup>
+			
+			<s:HGroup gap="24">
+				<s:Label text="Account Number:"
+						 width="140"/>
+				<s:Label text="123456"
+						 width="140"/>
+			</s:HGroup>
+			
+			<s:HGroup gap="24">
+				<s:Label text="Nickname:"
+						 width="140"/>
+				<s:Label text="HQ"
+						 width="140"/>
+			</s:HGroup>
+		</s:VGroup>
+		
+	</s:Group>
+	
+	<s:HGroup width="100%" horizontalAlign="right">
+		<s:Button label="Cancel"/>
+		<s:Button label="Back" 
+				  visible="{showVerify}" 
+				  includeInLayout="{showVerify}"
+				  click="handleBackClick(event)"/>
+		<s:Button label="Verify Payee"
+				  visible="{!showVerify}" 
+				  includeInLayout="{!showVerify}"
+				  click="handleVerifyClick(event)"/>
+		<s:Button label="Add Payee"
+				  visible="{showVerify}" 
+				  includeInLayout="{showVerify}"/>
+	</s:HGroup>
+</s:Group>

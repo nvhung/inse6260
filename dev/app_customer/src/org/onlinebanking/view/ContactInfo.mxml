@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayList;
+			
+			[Bindable]
+			private var provinces: ArrayList = new ArrayList([
+					"Alberta",
+					"British Columbia",
+					"Manitoba",
+					"New Brunswick",
+					"Newfoundland and Labrador",
+					"Northwest Teritories",
+					"Nova Scotia",
+					"Nunavut",
+					"Ontario",
+					"Prince Edward Island",
+					"Quebec",
+					"Saskatchewan",
+					"Yukon"
+				]);
+			
+			private function handleEditClick(event: MouseEvent): void {
+				currentState = "edit";
+			}
+			
+			private function handleVerifyClick(event: MouseEvent): void {
+				currentState = "verify";
+			}
+			
+			private function handleSaveClick(event: MouseEvent): void {
+				currentState = "view";
+			}
+			
+			private function handleCancelClick(event: MouseEvent): void {
+				if (currentState == "edit") {
+					currentState = "verify";
+				}
+				else if (currentState == "verify") {
+					currentState = "edit";
+				}
+			}
+		]]>
+	</fx:Script>
+	
+	<s:states>
+		<s:State name="view"/>
+		<s:State name="edit"/>
+		<s:State name="verify"/>
+	</s:states>
+	
+	<s:layout>
+		<s:VerticalLayout gap="16"/>
+	</s:layout>
+	
+	<s:Label text="My Contact Information"
+			 styleName="tabHeader"/>
+	
+	<s:Label fontWeight="bold"
+			 includeIn="edit,verify"
+			 text.edit="Change your contact information"
+			 text.verify="Verify your changes"/>
+	
+	<s:Group width="100%">
+		
+		<s:Rect top="0" bottom="0" left="0" right="0">
+			<s:stroke>
+				<s:SolidColorStroke color="0xE4E4E4"/>
+			</s:stroke>
+			
+			<s:fill>
+				<s:SolidColor color="0xF6F6F6"/>
+			</s:fill>
+		</s:Rect>
+		
+		<s:VGroup top="16" bottom="16" left="16" right="16"
+				  gap="18">
+			
+			<s:HGroup gap="32">
+				<s:Label width="200" text="Name:"/>
+				<s:Label width="200" text="A NGUYEN"/>
+			</s:HGroup>
+			
+			<s:HGroup gap="32">
+				<s:Label width="200" text="Street Address:"/>
+				<s:Label width="200"
+						 includeIn="view,verify"
+						 text="1234 RUE SOMEWHERE"/>
+				<s:HGroup includeIn="edit">
+					<s:TextInput width="80"/>
+					<s:TextInput width="300"/>
+				</s:HGroup>
+			</s:HGroup>
+			
+			<s:HGroup gap="32" includeIn="edit">
+				<s:Label width="200" text="Apt/Suite Number:"/>
+				<s:TextInput width="80"/>
+			</s:HGroup>
+			
+			<s:HGroup gap="32">
+				<s:Label width="200" text="City:"/>
+				<s:Label width="200"
+						 includeIn="view,verify"
+						 text="Montreal"/>
+				<s:TextInput width="200"
+							 includeIn="edit"/>
+			</s:HGroup>
+			
+			<s:HGroup gap="32">
+				<s:Label 
+					width="200" 
+					text="Province:"/>
+				<s:Label 
+					width="200"
+					includeIn="view,verify"
+					text="QUEBEC"/>
+				<s:DropDownList
+					width="200"
+					includeIn="edit"
+					dataProvider="{provinces}"/>
+			</s:HGroup>
+			
+			<s:HGroup gap="32">
+				<s:Label width="200" text="Postal Code:"/>
+				<s:Label 
+					width="200"
+					includeIn="view,verify"
+					text="A1B 2C3"/>
+				<s:TextInput 
+					width="80"
+					includeIn="edit"/>
+			</s:HGroup>
+			
+			<s:HGroup gap="32">
+				<s:Label width="200" text="Email:"/>
+				<s:Label 
+					width="200"
+					includeIn="view,verify"
+					text="a@nguyen.com"/>
+				<s:TextInput
+					width="300"
+					includeIn="edit"/>
+			</s:HGroup>
+			
+			<s:HGroup gap="32">
+				<s:Label width="200" text="Home Telephone:"/>
+				<s:Label 
+					width="200" 
+					includeIn="view,verify"
+					text="514 123 4567"/>
+				<s:TextInput
+					width="100"
+					includeIn="edit"/>
+			</s:HGroup>
+			
+			<s:HGroup gap="32">
+				<s:Label width="200" text="Business Telephone:"/>
+				<s:Label 
+					width="200" 
+					includeIn="view,verify"
+					text="514 123 4568"/>
+				<s:TextInput
+					width="100"
+					includeIn="edit"/>
+			</s:HGroup>
+			
+			<s:HGroup gap="32">
+				<s:Label width="200" text="Mobile Telephone:"/>
+				<s:Label 
+					width="200"
+					includeIn="view,verify"
+					text=""/>
+				<s:TextInput
+					width="100"
+					includeIn="edit"/>
+			</s:HGroup>
+		</s:VGroup>
+	</s:Group>
+	
+	<s:HGroup width="100%" horizontalAlign="right">
+		<s:Button label="Edit Contact Information"
+				  includeIn="view"
+				  click="handleEditClick(event)"/>
+		<s:Button label="Cancel"
+				  includeIn="edit,verify"
+				  click="handleCancelClick(event)"/>
+		<s:Button label="Verify Changes"
+				  includeIn="edit"
+				  click="handleVerifyClick(event)"/>
+		<s:Button label="Save Changes"
+				  includeIn="verify"
+				  click="handleSaveClick(event)"/>
+	</s:HGroup>
+	
+</s:Group>

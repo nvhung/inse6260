@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	
+	<fx:Declarations>
+		<s:ArrayList id="viewItems">
+			<fx:String>Today</fx:String>
+			<fx:String>Last 3 days</fx:String>
+			<fx:String>Last 7 days</fx:String>
+			<fx:String>Last 14 days</fx:String>
+			<fx:String>This month</fx:String>
+			<fx:String>Last 60 days</fx:String>
+			<fx:String>February 2014</fx:String>
+		</s:ArrayList>
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.formatters.DateFormatter;
+			
+			import org.onlinebanking.util.FormatUtil;
+			import org.onlinebanking.vo.AccountVO;
+			import org.onlinebanking.vo.TransactionVO;
+			
+			import spark.events.GridSelectionEvent;
+			
+			
+			[Bindable]
+			public var account: AccountVO;
+			
+			
+			private function getDateLabel(transaction: TransactionVO, column: DataGridColumn): String {
+				return FormatUtil.formatDate(transaction.date);
+			}
+			
+			private function getDebitLabel(transaction: TransactionVO, column: DataGridColumn): String {
+				return FormatUtil.formatCurrency(transaction.debit, false);
+			}
+			
+			private function getCreditLabel(transaction: TransactionVO, column: DataGridColumn): String {
+				return FormatUtil.formatCurrency(transaction.credit, false);
+			}
+			
+			private function getBalanceLabel(transaction: TransactionVO, column: DataGridColumn): String {
+				return FormatUtil.formatCurrency(transaction.balance, false);
+			}
+			
+			private function handleSelectionChanging(event: GridSelectionEvent): void {
+				event.preventDefault();
+			}
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout gap="8"/>
+	</s:layout>
+	
+	<s:Label fontWeight="bold" text="{account.getTypeLabel() + ' ' + account.accountNumber}"/>
+	
+	<s:Group width="100%">
+		
+		<s:Rect left="0" right="0" top="0" bottom="0">
+			<s:stroke>
+				<s:SolidColorStroke color="0xE4E4E4"/>
+			</s:stroke>
+			<s:fill>
+				<s:SolidColor color="0xE8F3F9"/>
+			</s:fill>
+		</s:Rect>
+		
+		<s:Label left="12" right="12" top="12" bottom="12"
+				 text="{'Account Balance: ' + account.getFormattedBalance()}"/>
+		
+	</s:Group>
+	
+	<s:Group top="66" width="100%">
+		<s:Rect left="0" right="0" top="0" bottom="0">
+			<s:stroke>
+				<s:SolidColorStroke color="0xE4E4E4"/>
+			</s:stroke>
+			<s:fill>
+				<s:SolidColor color="0xEFEFEF"/>
+			</s:fill>
+		</s:Rect>
+		
+		<s:VGroup horizontalAlign="left" paddingBottom="12" paddingLeft="12" paddingRight="12"
+				  paddingTop="12">
+			
+			<s:Label fontWeight="bold" text="Transaction History"/>
+			
+			<s:HGroup verticalAlign="middle">
+				<s:Label width="100" text="View:" textAlign="right"/>
+				<s:DropDownList dataProvider="{viewItems}"/>
+			</s:HGroup>
+			
+			<s:HGroup verticalAlign="middle">
+				<s:Label width="100" text="Show from:" textAlign="right"/>
+				<mx:DateField/>
+				<s:Label text="to:"/>
+				<mx:DateField/>
+				<s:Button label="View"/>
+			</s:HGroup>
+			
+			<s:HGroup verticalAlign="middle">
+				<s:Label width="100" text="Filter description:" textAlign="right"/>
+				<s:TextInput width="200"/>
+				<s:Button label="Filter"/>
+			</s:HGroup>
+			
+			<mx:DataGrid id="transactions" width="100%" selectable="false">
+				<mx:columns>
+					<mx:DataGridColumn width="120" dataField="date" headerText="Transaction Date"
+									   labelFunction="getDateLabel" resizable="false"
+									   sortable="true"/>
+					<mx:DataGridColumn width="280" dataField="description"
+									   headerText="Description" resizable="false"
+									   sortable="true"/>
+					<mx:DataGridColumn width="70" dataField="debit" headerText="Debit"
+									   labelFunction="getDebitLabel" resizable="false"
+									   sortable="true"/>
+					<mx:DataGridColumn width="70" dataField="credit" headerText="Credit"
+									   labelFunction="getCreditLabel" resizable="false"
+									   sortable="true"/>
+					<mx:DataGridColumn width="80" dataField="balance" headerText="Balance"
+									   labelFunction="getBalanceLabel" resizable="false"
+									   sortable="true"/>
+				</mx:columns>
+			</mx:DataGrid>
+		</s:VGroup>
+	</s:Group>
+</s:Group>

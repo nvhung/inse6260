@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   
+			   xmlns:view="org.onlinebanking.view.*"
+			   
+			   preloader="mx.preloaders.DownloadProgressBar"
+			   
+			   creationComplete="handleCreationComplete(event)">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import mx.messaging.Channel;
+			import mx.messaging.ChannelSet;
+			import mx.messaging.channels.AMFChannel;
+			import mx.messaging.channels.SecureAMFChannel;
+			import mx.rpc.AsyncResponder;
+			import mx.rpc.AsyncToken;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			import mx.rpc.remoting.RemoteObject;
+			
+//			import org.onlinebanking.ApplicationFacade;
+//			import org.onlinebanking.vo.UserVO;
+			
+			
+			private const AMF_END_POINT: String = "http://www.onlinebanking.com/webapp/messagebroker/amf";
+			private var channelSet: ChannelSet;
+			
+			private var loginService: RemoteObject = new RemoteObject("loginService");
+			private var userService: RemoteObject = new RemoteObject("userService");
+//			private var user: UserVO = null;
+			
+			
+			
+			private function handleCreationComplete(event: FlexEvent): void {
+				trace("creation complete");
+				
+				var channel: Channel = new AMFChannel("my-amf", AMF_END_POINT);
+				
+				channelSet = new ChannelSet();
+				channelSet.addChannel(channel);
+			}
+			
+			private function handleLoginClick(event: MouseEvent): void {
+				
+				if (channelSet.authenticated == false) {
+					var token:AsyncToken = channelSet.login("hung","123abc");
+					token.addResponder(
+						new AsyncResponder(
+							function (event: ResultEvent, token: Object = null): void {
+								trace(event.result);
+							},
+							function (event: FaultEvent, token: Object = null): void {
+								trace(event.message);
+							}
+						)
+					);
+				}
+			}
+			
+			private function handleLogoutClick(event: MouseEvent): void {
+				
+				if (channelSet.authenticated) {
+					var token:AsyncToken = channelSet.logout();
+					token.addResponder(
+						new AsyncResponder(
+							function (event: ResultEvent, token: Object = null): void {
+								trace(event.result);
+							},
+							function (event: FaultEvent, token: Object = null): void {
+								trace(event.message);
+							}
+						)
+					);
+				}
+			}
+			
+			private function handleUserClick(event: MouseEvent): void {
+				userService = new RemoteObject("userService");
+				userService.endpoint = AMF_END_POINT;
+				userService.getCurrentUser();
+				userService.addEventListener(ResultEvent.RESULT, function (event: ResultEvent): void {
+					trace(event.result);
+				});
+				userService.addEventListener(FaultEvent.FAULT, function (event: FaultEvent): void {
+					trace(event.message);
+				});
+			}
+		]]>
+	</fx:Script>
+	<!--
+	<s:layout>
+	<s:VerticalLayout/>
+	</s:layout>
+	
+	<s:Label top="8" left="8" text="Online Banking"/>
+	
+	<s:Button label="login" click="handleLoginClick(event)"/>
+	<s:Button label="logout" click="handleLogoutClick(event)"/>
+	<s:Button label="user" click="handleUserClick(event)"/>
+	
+	<view:Main/>
+	-->
+	
+	
+	<s:ModuleLoader top="0" bottom="0" left="0" right="0" url="customer.swf"/>
+	
+</s:Application>

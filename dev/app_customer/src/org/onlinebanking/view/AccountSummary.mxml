@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 xmlns:data="org.onlinebanking.data.*">
+	
+	<fx:Style>
+		.headerCell {
+			paddingLeft: 4;
+			paddingRight: 4;
+			fontWeight: bold;
+			verticalAlign: middle;
+		}
+		
+		.cell {
+			paddingLeft: 4;
+			paddingRight: 4;
+			verticalAlign: middle;
+		}
+		
+	</fx:Style>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayList;
+			import mx.collections.IList;
+			
+			import org.onlinebanking.util.FormatUtil;
+			import org.onlinebanking.vo.AccountVO;
+			
+			
+			[Bindable]
+			public var accounts: IList;
+			[Bindable]
+			public var totalBalance: Number;
+		]]>
+	</fx:Script>
+	
+	<s:HGroup height="25" gap="0"
+			  verticalAlign="middle">
+		<s:Label width="200"
+				 styleName="headerCell"
+				 text="Account Type"/>
+		<s:Label width="250"
+				 styleName="headerCell"
+				 text="Account#"/>
+		<s:Label width="200"
+				 styleName="headerCell"
+				 textAlign="right"
+				 text="Balance"/>
+	</s:HGroup>
+	
+	<s:Rect top="25" left="0" right="0" height="25">
+		<s:fill>
+			<s:SolidColor color="0xE5E5E5"/>
+		</s:fill>
+	</s:Rect>
+	
+	<s:Label top="25" left="450" width="200" height="25"
+			 textAlign="right"
+			 styleName="headerCell"
+			 text="{FormatUtil.formatCurrency(totalBalance)}"/>
+	
+	<s:List top="50"
+			borderVisible="false"
+			dataProvider="{accounts}">
+		<s:itemRenderer>
+			<fx:Component>
+				<s:ItemRenderer autoDrawBackground="false">
+					<fx:Script>
+						<![CDATA[
+							import org.onlinebanking.util.FormatUtil;
+							import org.onlinebanking.vo.AccountType;
+							import org.onlinebanking.vo.AccountVO;
+							
+							[Bindable]
+							private var account: AccountVO;
+							
+							
+							override public function set data(value: Object): void {
+								super.data = value;
+								account = value as AccountVO;
+							}
+						]]>
+					</fx:Script>
+					
+					<s:Rect top="0" bottom="0" left="0" right="0">
+						<s:fill>
+							<s:SolidColor color="0xF0F0F0"/>
+						</s:fill>
+					</s:Rect>
+					
+					<s:HGroup height="25" gap="0"
+							  verticalAlign="middle">
+						<s:Label width="200"
+								 styleName="cell"
+								 text="{AccountType.toString(account.type)}"/>
+						<s:Label width="250"
+								 styleName="cell"
+								 text="{account.accountNumber}"/>
+						<s:Label width="200"
+								 styleName="cell"
+								 textAlign="right"
+								 text="{FormatUtil.formatCurrency(account.balance)}"/>
+					</s:HGroup>
+				</s:ItemRenderer>
+			</fx:Component>
+		</s:itemRenderer>
+	</s:List>
+	
+</s:Group>

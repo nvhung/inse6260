@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 
+		 xmlns:view="org.onlinebanking.view.*">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayList;
+			import spark.events.IndexChangeEvent;
+			
+			[Bindable]
+			private var menuItems: ArrayList = new ArrayList([
+				"My Contact Information",
+				"Change My Password",
+				"My Security Settings"
+			]);
+			
+			
+			private function handleMenuChange(event: IndexChangeEvent): void {
+				viewStack.selectedIndex = event.newIndex;
+			}
+		]]>
+	</fx:Script>
+	
+	<s:Line y="3" xFrom="0" xTo="229">
+		<s:stroke>
+			<s:SolidColorStroke color="0xCCCCCC"/>
+		</s:stroke>
+	</s:Line>
+	
+	<s:List id="menu"
+			top="4" left="0" width="230"
+			borderVisible="false"
+			dataProvider="{menuItems}"
+			selectedIndex="0"
+			change="handleMenuChange(event)">
+		<s:itemRenderer>
+			<fx:Component>
+				<s:ItemRenderer>
+					<s:Group height="40">
+						<s:Label top="4" left="4" right="4" 
+								 text="{data}"/>
+						
+						<s:Line y="39" xFrom="0" xTo="229">
+							<s:stroke>
+								<s:SolidColorStroke color="0xCCCCCC"/>
+							</s:stroke>
+						</s:Line>
+					</s:Group>
+					
+				</s:ItemRenderer>
+			</fx:Component>
+		</s:itemRenderer>
+	</s:List>
+	
+	<mx:ViewStack id="viewStack"
+				  top="8" left="242" width="650"
+				  creationPolicy="all"
+				  selectedIndex="0">
+		
+		<s:NavigatorContent width="100%" height="100%">
+			<view:ContactInfo 
+				id="tabContactInfo"
+				top="0" bottom="0" left="0" right="0"/>
+		</s:NavigatorContent>
+		
+		<s:NavigatorContent width="100%" height="100%">
+			<view:ChangePassword 
+				id="tabChangePassword"
+				top="0" bottom="0" left="0" right="0"/>
+		</s:NavigatorContent>
+		
+		<s:NavigatorContent width="100%" height="100%">
+			<view:SecuritySettings 
+				id="tabSecuritySettings"
+				top="0" bottom="0" left="0" right="0"/>
+		</s:NavigatorContent>
+		
+	</mx:ViewStack>
+	
+</s:Group>
